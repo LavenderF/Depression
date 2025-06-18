@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>治愈小站 - 薄荷心情</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+  body {
+    margin: 0;
+    background: #e8f6f3; /* 淡薄荷绿背景 */
+    font-family: 'Nunito', sans-serif;
+    color: #2a4d43;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.2rem;
+    color: #3a7d70;
+  }
+  h2 {
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #4a9a88;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  #warm-sentence {
+    background: #d7f0e8;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.3rem;
+    max-width: 480px;
+    box-shadow: 0 4px 8px rgba(42, 77, 67, 0.15);
+    margin-bottom: 3rem;
+    text-align: center;
+    user-select: none;
+  }
+  textarea {
+    width: 90vw;
+    max-width: 480px;
+    height: 150px;
+    border-radius: 12px;
+    border: 2px solid #7ec8b2;
+    padding: 1rem;
+    font-size: 1rem;
+    resize: vertical;
+    font-family: 'Nunito', sans-serif;
+    color: #2a4d43;
+    box-shadow: inset 0 0 8px #b2ded1;
+    transition: border-color 0.3s ease;
+  }
+  textarea:focus {
+    border-color: #3a7d70;
+    outline: none;
+    box-shadow: 0 0 8px #3a7d70;
+  }
+  button {
+    margin-top: 1rem;
+    background: #7ec8b2;
+    border: none;
+    padding: 0.7rem 1.8rem;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(42, 77, 67, 0.3);
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #4a9a88;
+  }
+  #audio-container {
+    margin-top: 3rem;
+    max-width: 480px;
+    width: 90vw;
+    background: #d7f0e8;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 4px 8px rgba(42, 77, 67, 0.15);
+    text-align: center;
+  }
+  audio {
+    width: 100%;
+    outline: none;
+  }
+  footer {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: #4a9a88;
+    padding: 1rem 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>薄荷心情</h1>
+<h2>治愈抑郁，温暖每一天</h2>
+
+<div id="warm-sentence">正在加载暖心句子...</div>
+
+<textarea id="mood-journal" placeholder="写下你的心情，哪怕只是几句话..."></textarea>
+<button id="save-btn">保存日记</button>
+
+<div id="audio-container">
+  <div>正念冥想引导</div>
+  <audio controls preload="none" src="https://cdn.pixabay.com/download/audio/2022/03/21/audio_95d96a98b2.mp3?filename=calm-relaxing-meditation-ambient-1137.mp3"></audio>
+</div>
+
+<footer>© 2025 薄荷心情 · 温柔陪伴你的每一天</footer>
+
+<script>
+  const sentences = [
+    "每一次呼吸，都是新生的开始。",
+    "阴云总会散去，阳光终会照进心房。",
+    "你比你想象的要坚强得多。",
+    "允许自己慢下来，给心灵一点温柔。",
+    "黑夜虽然漫长，星光依然闪烁。",
+    "不完美的你，也值得被温柔对待。",
+    "微小的进步，也是一种胜利。",
+    "未来虽未知，爱与希望常伴你左右。"
+  ];
+
+  const warmSentenceEl = document.getElementById('warm-sentence');
+  function showRandomSentence() {
+    const index = Math.floor(Math.random() * sentences.length);
+    warmSentenceEl.textContent = sentences[index];
+  }
+  showRandomSentence();
+
+  const saveBtn = document.getElementById('save-btn');
+  const moodJournal = document.getElementById('mood-journal');
+
+  saveBtn.addEventListener('click', () => {
+    const text = moodJournal.value.trim();
+    if (!text) {
+      alert("写点什么吧，哪怕是一句简单的感受。😊");
+      return;
+    }
+    // 简单本地保存示范（本地存储）
+    let journals = JSON.parse(localStorage.getItem('moodJournals') || "[]");
+    journals.push({ text, date: new Date().toISOString() });
+    localStorage.setItem('moodJournals', JSON.stringify(journals));
+    alert("日记已保存，你真棒！💚");
+    moodJournal.value = '';
+  });
+</script>
+
+</body>
+</html>
