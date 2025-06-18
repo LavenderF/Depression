@@ -8,7 +8,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
   body {
     margin: 0;
-    background: #e8f6f3; /* 淡薄荷绿背景 */
+    background: #e8f6f3;
     font-family: 'Nunito', sans-serif;
     color: #2a4d43;
     display: flex;
@@ -76,20 +76,6 @@
   button:hover {
     background: #4a9a88;
   }
-  #audio-container {
-    margin-top: 3rem;
-    max-width: 480px;
-    width: 90vw;
-    background: #d7f0e8;
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    box-shadow: 0 4px 8px rgba(42, 77, 67, 0.15);
-    text-align: center;
-  }
-  audio {
-    width: 100%;
-    outline: none;
-  }
   footer {
     margin-top: auto;
     font-size: 0.85rem;
@@ -107,11 +93,6 @@
 
 <textarea id="mood-journal" placeholder="写下你的心情，哪怕只是几句话..."></textarea>
 <button id="save-btn">保存日记</button>
-
-<div id="audio-container">
-  <div>正念冥想引导</div>
-  <audio controls preload="none" src="https://cdn.pixabay.com/download/audio/2022/03/21/audio_95d96a98b2.mp3?filename=calm-relaxing-meditation-ambient-1137.mp3"></audio>
-</div>
 
 <footer>© 2025 薄荷心情 · 温柔陪伴你的每一天</footer>
 
@@ -143,7 +124,6 @@
       alert("写点什么吧，哪怕是一句简单的感受。😊");
       return;
     }
-    // 简单本地保存示范（本地存储）
     let journals = JSON.parse(localStorage.getItem('moodJournals') || "[]");
     journals.push({ text, date: new Date().toISOString() });
     localStorage.setItem('moodJournals', JSON.stringify(journals));
@@ -154,3 +134,4 @@
 
 </body>
 </html>
+
